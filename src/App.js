@@ -1,26 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firebaseConnect } from "react-redux-firebase";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomeScreen from './components/HomeScreen/HomeScreen.js'
+
+class App extends Component {
+  render() {
+    const { auth } = this.props;
+
+    if(auth.isLoaded) {
+      return(
+          <BrowserRouter>
+            <div className="App">
+              <Switch>
+                <Route path="/" component={HomeScreen}/>
+              </Switch>
+            </div>
+          </BrowserRouter>
+      )
+    }
+    return null;
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.firebase.auth,
+});
+
+
+export default compose(
+    firebaseConnect(),
+    connect(mapStateToProps)
+)(App);
