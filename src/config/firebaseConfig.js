@@ -3,7 +3,6 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/analytics';
 
-// Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyD6Jp5GY_8C-F4rx8T_X-4yOBUsyJgD3lQ",
     authDomain: "final-project-gagandhi.firebaseapp.com",

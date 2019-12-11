@@ -17,7 +17,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export function registerSuccess() {
     return { type: 'REGISTER_SUCCESS' }
 };
-export function registerError(error) {
+export function registerError(error) { 
     return { type: 'REGISTER_ERROR', error }
 };
 export function loginSuccess() {
