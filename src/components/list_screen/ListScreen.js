@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
 
 import ListTrash from './ListTrash.js';
+
+import { Row, Col } from 'react-materialize';
+
+import LeftComponent from "../left-component/left-component";
+import RightComponent from "../right-component/right-component";
+import MiddleComponent from "../middle-component/middle-component";
 
 class ListScreen extends Component {
 
@@ -14,13 +19,13 @@ class ListScreen extends Component {
         owner: '',
     };
 
-    handleDeleteList = () => {
+    handleDeleteWireframe = () => {
 
-        let id = this.props.todoList.id;
+        let id = this.props.wireframe.id;
 
         let firestore = this.props.firestore;
 
-        firestore.collection('todoLists').doc(id).delete();
+        firestore.collection('WireFrames').doc(id).delete();
 
         return <Redirect to="/" />;
 
@@ -35,18 +40,6 @@ class ListScreen extends Component {
         }));
     };
 
-    handleOwner = () => {
-        let newOwner = this.refs.Owner.value;
-
-        if(newOwner === '') {
-            newOwner = "New Owner";
-        }
-
-        let firestore = this.props.firestore.collection('todoLists').doc(this.props.todoList.id).update(
-            {owner: newOwner}
-        );
-
-    };
 
     handleName = () => {
         let newName = this.refs.Name.value;
@@ -55,7 +48,7 @@ class ListScreen extends Component {
             newName = "New Name";
         }
 
-        let firestore = this.props.firestore.collection('todoLists').doc(this.props.todoList.id).update(
+        let firestore = this.props.firestore.collection('WireFrames').doc(this.props.wireframe.id).update(
             {name: newName}
         );
     };
@@ -84,10 +77,29 @@ class ListScreen extends Component {
 
                 <div className="container white">
                     <ListTrash
-                    deleteList = {this.handleDeleteList}/>
+                    deleteList = {this.handleDeleteWireframe}/>
                 </div>
 
-                {/*<ItemsList todoList={wireframe} />*/}
+
+                <Row>
+                    <Col className="left-component major-component" m={2}> Left Component
+                        <div>
+                            <LeftComponent/>
+                        </div>
+                    </Col>
+                    <Col className="middle-component major-component" m={8}>Middle Component
+                        <div>
+                            <MiddleComponent
+                            wireframe={this.props.wireframe}
+                            />
+                        </div>
+                    </Col>
+                    <Col className="right-component major-component" m={2}>Right Component
+                        <div>
+                            <RightComponent/>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         );
     }

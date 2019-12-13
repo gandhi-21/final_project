@@ -420,3 +420,27 @@ img {
 .card-row:hover {
   background-color: lightgreen;
 }
+
+.major-component {
+  border-color: black;
+  border-style: solid;
+  border-radius: 8px;
+  border-width: 2px;
+  height: 100%
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    width:100%;
+  }
+}
+
+
+/* materialize.min.css | https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css */
+
+@media only screen and (min-width: 601px) {
+  .row .col.m8 {
+    height: 730px;
+  }
+}
+

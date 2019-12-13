@@ -14,7 +14,7 @@ class DeleteConfirm extends React.Component {
                         <br/>
                         Delete List ?
                         <br/><br/><br/>
-                        <b>Are you sure you want to delete this list ?</b>
+                        <b>Are you sure you want to delete this Wireframe ?</b>
                         <br/><br/>
                         <div>
                             <button id="yes_confirm" onClick={() => {this.props.delete()}}>Yes</button>
