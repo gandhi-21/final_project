@@ -14,10 +14,14 @@ import MiddleComponent from "../middle-component/middle-component";
 
 class ListScreen extends Component {
 
-    state = {
-        name: '',
-        owner: '',
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+          wireframe: this.props.wireframe
+        };
+
+    }
 
     handleDeleteWireframe = () => {
 
@@ -53,6 +57,37 @@ class ListScreen extends Component {
         );
     };
 
+    handleNewComponent = (type) => {
+        // Make a new component using the type.
+        // Make a local state
+        // Add it to the list of components
+        // Update the state/props
+        console.log("Make a new container of type: " + type);
+
+        var newItem = {
+            "type": "customContainer",
+            "width": 140,
+            "height": 50,
+            "positionX": 50,
+            "positionY": 50,
+            "positionZ": 0,
+            "text": "Background Container",
+            "fontSize": -1,
+            "backgroundColor": "#ffffff",
+            "borderColor": "#000000",
+            "fontColor": "#000000",
+            "borderThickness": 2,
+            "borderRadius": 2
+        };
+
+        this.props.wireframe.components.push(newItem);
+
+        console.log(this.props.wireframe);
+
+        this.setState({wireframe: this.props.wireframe});
+
+    };
+
     render() {
         const auth = this.props.auth;
         const wireframe = this.props.wireframe;
@@ -84,7 +119,8 @@ class ListScreen extends Component {
                 <Row>
                     <Col className="left-component major-component" m={2}> Left Component
                         <div>
-                            <LeftComponent/>
+                            <LeftComponent
+                            makeNewComponent={this.handleNewComponent}/>
                         </div>
                     </Col>
                     <Col className="middle-component major-component" m={8}>Middle Component
