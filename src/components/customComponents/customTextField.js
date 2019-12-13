@@ -1,24 +1,46 @@
 import React, { Component } from 'react';
+import {Rnd} from "react-rnd";
 
 class CustomTextField extends Component {
 
+    constructor(props){
+        super(props);
+
+        this.state = {
+            field : this.props.field,
+            UserStyle: {
+                width: this.props.field.width,
+                height: this.props.field.height,
+                fontSize: this.props.field.fontSize,
+                backgroundColor: this.props.field.backgroundColor,
+                borderColor: this.props.field.borderColor,
+                fontColor: this.props.field.fontColor,
+                borderWidth: this.props.field.borderThickness,
+                borderRadius: this.props.field.borderRadius,
+                borderStyle: 'solid',
+                positionX: this.props.field.positionX,
+                positionY: this.props.field.positionY
+            }
+        }
+    }
+
     render() {
-
-        const field = this.props.field;
-
-        const UserStyle = {
-            width: field.width,
-            height: field.height,
-            fontSize: field.fontSize,
-            backgroundColor: field.backgroundColor,
-            borderColor: field.borderColor,
-            fontColor: field.fontColor,
-            borderWidth: field.borderThickness,
-            borderRadius: field.borderRadius,
-            borderStyle: 'solid'
-        };
         return (
-            <input type="text" style={UserStyle} value={field.text}/>
+           <div>
+               <Rnd
+                   default={{
+                       width: this.state.UserStyle.width,
+                       height: this.state.UserStyle.height,
+                       x: this.state.UserStyle.positionX,
+                       y: this.state.UserStyle.positionY
+                   }}
+                   style={this.state.UserStyle}>
+                   {this.state.field.text}
+               </Rnd>
+
+               <button onClick={() => {console.log(this.state)}}>Print Wireframe</button>
+           </div>
+
         )
     }
 }

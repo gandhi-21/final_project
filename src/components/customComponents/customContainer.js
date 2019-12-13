@@ -18,7 +18,9 @@ class CustomContainer extends Component {
                 fontColor: this.props.container.fontColor,
                 borderWidth: this.props.container.borderThickness,
                 borderRadius: this.props.container.borderRadius,
-                borderStyle: 'solid'
+                borderStyle: 'solid',
+                positionX: this.props.container.positionX,
+                positionY: this.props.container.positionY
             }
         }
     }
@@ -27,12 +29,11 @@ class CustomContainer extends Component {
 
         return (
             <Rnd
-            size={{width: this.props.container.width, height: this.props.container.height}}
-            position={{x: this.props.container.positionX, y: this.props.container.positionY}}
-            onDragStop={(e, d) => {this.props.container.positionX = d.x; this.props.container.positionY = d.y}}
-            onResizeStop={(e, direction, ref, delta, position) => {
-                this.props.container.width = ref.style.width;
-                this.props.container.height = ref.style.height;
+            default={{
+                width: this.state.UserStyle.width,
+                height: this.state.UserStyle.height,
+                x: this.state.UserStyle.positionX,
+                y: this.state.UserStyle.positionY
             }}
             style={this.state.UserStyle}
             >

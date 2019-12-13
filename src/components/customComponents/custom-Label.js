@@ -17,7 +17,9 @@ class CustomLabel extends Component {
                 fontColor: this.props.label.fontColor,
                 borderWidth: this.props.label.borderThickness,
                 borderRadius: this.props.label.borderRadius,
-                borderStyle: 'solid'
+                borderStyle: 'solid',
+                positionX: this.props.label.positionX,
+                positionY: this.props.label.positionY
             }
         }
     }
@@ -27,12 +29,11 @@ class CustomLabel extends Component {
 
         return (
             <Rnd
-                size={{width: this.props.label.width, height: this.props.label.height}}
-                position={{x: this.props.label.positionX, y: this.props.label.positionY}}
-                onDragStop={(e, d) => {this.props.label.positionX = d.x; this.props.label.positionY = d.y}}
-                onResizeStop={(e, direction, ref, delta, position) => {
-                    this.props.label.width = ref.style.width;
-                    this.props.label.height = ref.style.height;
+                default={{
+                    width: this.state.UserStyle.width,
+                    height: this.state.UserStyle.height,
+                    x: this.state.UserStyle.positionX,
+                    y: this.state.UserStyle.positionY
                 }}
                 style={this.state.UserStyle}>
                 {this.state.label.text}
