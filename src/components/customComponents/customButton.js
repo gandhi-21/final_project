@@ -31,9 +31,10 @@ class CustomButton extends Component {
                   width: this.state.UserStyle.width,
                   height: this.state.UserStyle.height,
                   x: this.state.UserStyle.positionX,
-                  y: this.state.UserStyle.positionY
+                  y: this.state.UserStyle.positionY,
               }}
-              style={this.state.UserStyle}>
+              style={this.state.UserStyle}
+          bounds=".middle-component">
               {this.state.button.text}
           </Rnd>
         );

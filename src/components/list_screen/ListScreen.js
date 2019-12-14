@@ -12,15 +12,24 @@ import LeftComponent from "../left-component/left-component";
 import RightComponent from "../right-component/right-component";
 import MiddleComponent from "../middle-component/middle-component";
 
+
+// Implement the current Selected Item Machinism
+// Implement the border on the current selected item
+// Implement the update components on drag, resize
+// Implement the update property part of selected item
+// Implement limiting the dragging scope -- done
+// Implement Save and Close
+// Implement the Zoom in and Zoom out
+
 class ListScreen extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
-          wireframe: this.props.wireframe
+          wireframe: this.props.wireframe,
+          isItemSelected: false,
+          currentSelectedItem: null
         };
-
     }
 
     handleDeleteWireframe = () => {
@@ -47,31 +56,24 @@ class ListScreen extends Component {
 
     handleName = () => {
         let newName = this.refs.Name.value;
-
         if(newName === '') {
             newName = "New Name";
         }
-
         let firestore = this.props.firestore.collection('WireFrames').doc(this.props.wireframe.id).update(
             {name: newName}
         );
     };
 
     handleNewComponent = (type) => {
-        // Make a new component using the type.
-        // Make a local state
-        // Add it to the list of components
-        // Update the state/props
         console.log("Make a new container of type: " + type);
-
         var newItem = {
-            "type": "customContainer",
+            "type": type,
             "width": 140,
             "height": 50,
             "positionX": 50,
             "positionY": 50,
             "positionZ": 0,
-            "text": "Background Container",
+            "text": "New" + type,
             "fontSize": -1,
             "backgroundColor": "#ffffff",
             "borderColor": "#000000",
@@ -79,14 +81,16 @@ class ListScreen extends Component {
             "borderThickness": 2,
             "borderRadius": 2
         };
-
         this.props.wireframe.components.push(newItem);
-
         console.log(this.props.wireframe);
-
-        this.setState({wireframe: this.props.wireframe});
-
+        this.updateState(this.state.wireframe.components, this.props.wireframe.components);
     };
+
+    updateState = (property, change) => {
+        this.setState({property: change});
+        console.log("Updated local state");
+    };
+
 
     render() {
         const auth = this.props.auth;
@@ -126,13 +130,18 @@ class ListScreen extends Component {
                     <Col className="middle-component major-component" m={8}>Middle Component
                         <div>
                             <MiddleComponent
-                            wireframe={this.props.wireframe}
+                            wireframe={this.state.wireframe}
+                            updateState={this.updateState}
                             />
                         </div>
                     </Col>
                     <Col className="right-component major-component" m={2}>Right Component
                         <div>
-                            <RightComponent/>
+                            <RightComponent
+                            wireframe={this.state.wireframe}
+                            currentSelectedItem={this.state.wireframe.currentSelectedItem}
+                            updateState={this.updateState}
+                            updateProperty={this.updateProperty}/>
                         </div>
                     </Col>
                 </Row>
