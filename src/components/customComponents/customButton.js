@@ -33,7 +33,6 @@ class CustomButton extends Component {
                   x: this.state.UserStyle.positionX,
                   y: this.state.UserStyle.positionY
               }}
-
               style={this.state.UserStyle}>
               {this.state.button.text}
           </Rnd>
