@@ -1,7 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux';
 import todoJson from './WireFramerData.json'
 import { getFirestore } from 'redux-firestore';
+import { connect }  from 'react-redux';
+import { compose } from 'redux';
 
 class DatabaseTester extends React.Component {
 
@@ -59,6 +60,7 @@ class DatabaseTester extends React.Component {
     };
 
     render() {
+        console.log(this.props.auth);
         return (
             <div>
                 <button onClick={this.handleClear}>Clear Database</button>
