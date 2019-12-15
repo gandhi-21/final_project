@@ -25,6 +25,11 @@ class CustomContainer extends Component {
                 positionY: this.props.container.positionY}}
             bounds=".middle-component"
             onClick={() => {this.props.handleSelectedItem(this.props.container.key)}}
+            onResizeStop={(e, direction, ref, delta, position) => {
+                this.props.container.width = ref.style.width;
+                this.props.container.height = ref.style.height;
+                this.props.handleResize(this.props.container);
+            }}
             >
                 {this.props.container.text}
             </Rnd>

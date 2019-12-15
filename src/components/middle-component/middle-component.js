@@ -10,7 +10,8 @@ class MiddleComponent extends Component {
 
     makeNewCustomContainer = (block) => {
         return <CustomContainer container={block}
-                                handleSelectedItem={this.props.handleSelectedItem}/>
+                                handleSelectedItem={this.props.handleSelectedItem}
+                                handleResize={this.props.handleResize}/>
     };
 
     makeNewCustomLabel = (block) => {

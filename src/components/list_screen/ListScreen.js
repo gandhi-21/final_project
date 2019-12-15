@@ -15,7 +15,8 @@ import MiddleComponent from "../middle-component/middle-component";
 
 // Implement the current Selected Item Mechanism -- done
 // Implement the border on the current selected item
-// Implement the update components on drag, resize
+// Implement the update components on drag,
+// Implement the update component on resize -- done
 // Implement the update property part of selected item -- done
 // Implement the admin functions
 // Implement limiting the dragging scope -- done
@@ -23,7 +24,10 @@ import MiddleComponent from "../middle-component/middle-component";
 // Implement Close -- done
 // Implement the Zoom in and Zoom out
 // Add key to new items -- done
-// Implement the keyboard functions
+// Implement the duplicate function
+// Implement the delete shortcut function
+// Implement the update dimensions on the wireframe
+// Implement new wireframe button
 class ListScreen extends Component {
 
     constructor(props) {
@@ -81,6 +85,12 @@ class ListScreen extends Component {
         };
         this.props.wireframe.components.push(newItem);
         this.setState({wireframe: this.props.wireframe});
+    };
+
+    handleResize = (component) => {
+        this.props.wireframe.components[component.key] = component;
+        this.setState({wireframe: this.props.wireframe});
+        console.log(this.state);
     };
 
     updatePropertyText = (value, key) => {
@@ -163,6 +173,7 @@ class ListScreen extends Component {
                             wireframe={this.state.wireframe}
                             updateState={this.updateState}
                             handleSelectedItem={this.handleSelectedItem}
+                            handleResize={this.handleResize}
                             />
                         </div>
                     </Col>
