@@ -13,7 +13,7 @@ class HomeScreen extends Component {
 
         let newWireFrame = {
             name: "New Name",
-            owner: "New Owner",
+            owner: this.props.auth.uid,
             components: [],
             zoomPercent: 100,
             timestamp: this.props.firestore.FieldValue.serverTimestamp(),

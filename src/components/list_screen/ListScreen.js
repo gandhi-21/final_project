@@ -20,14 +20,14 @@ import MiddleComponent from "../middle-component/middle-component";
 // Implement the update property part of selected item -- done
 // Implement the admin functions
 // Implement limiting the dragging scope -- done
-// Implement Save
+// Implement Save -- done
 // Implement Close -- done
 // Implement the Zoom in and Zoom out
 // Add key to new items -- done
 // Implement the duplicate function
 // Implement the delete shortcut function
 // Implement the update dimensions on the wireframe
-// Implement new wireframe button
+// Implement new wireframe button -- done
 class ListScreen extends Component {
 
     constructor(props) {

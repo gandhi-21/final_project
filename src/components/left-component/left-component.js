@@ -14,7 +14,7 @@ class LeftComponent extends Component {
               <Row>
                   <Col>Zoom-Out</Col>
                   <Col>Zoom-In</Col>
-                  <Col><button onClick={this.props.handleSave}><Link to="/" >Save</Link></button></Col>
+                  <Col><button onClick={this.props.handleSave}>Save</button></Col>
                   <Col><button><Link to="/">Close</Link></button></Col>
               </Row>
 
