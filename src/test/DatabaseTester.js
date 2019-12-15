@@ -4,8 +4,10 @@ import { getFirestore } from 'redux-firestore';
 import { connect }  from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from "react-redux-firebase";
+import {Redirect} from 'react-router-dom';
 
 class DatabaseTester extends React.Component {
+
 
     // NOTE, BY KEEPING THE DATABASE PUBLIC YOU CAN
     // DO THIS ANY TIME YOU LIKE WITHOUT HAVING
@@ -62,22 +64,34 @@ class DatabaseTester extends React.Component {
     };
 
     render() {
-        console.log(this.props);
 
-        return (
-            <div>
-                <button onClick={this.handleClear}>Clear Database</button>
-                <button onClick={this.handleReset}>Reset Database</button>
-            </div>)
-    }
+        if(!this.props) {
+            return <React.Fragment />
+        } else {
+            const users = this.props.users;
+            const currentUser = this.props.auth.email;
+
+            for( let key in users) {
+                if(users[key].email === currentUser && users[key].isadmin === false) {
+                    return <Redirect to="/"/>
+                }
+            }
+
+            return (
+                <div>
+                    <button onClick={this.handleClear}>Clear Database</button>
+                    <button onClick={this.handleReset}>Reset Database</button>
+                </div>)
+            }
+        }
 }
 
 const mapStateToProps = function (state) {
-    console.log(state.firestore.data);
+    const users = state.firestore.data.Users;
     return {
         auth: state.firebase.auth,
         firebase: state.firebase,
-        users: state.firestore.data.Users
+        users: users
     };
 };
 

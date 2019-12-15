@@ -13,11 +13,10 @@ import RightComponent from "../right-component/right-component";
 import MiddleComponent from "../middle-component/middle-component";
 
 
-// Implement the admin functions
 // Implement the duplicate function
 // Implement the delete shortcut function
 // Implement the update dimensions on the wireframe
-// Delete the wireframe
+
 class ListScreen extends Component {
 
     constructor(props) {
