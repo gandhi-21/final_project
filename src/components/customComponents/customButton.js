@@ -41,7 +41,7 @@ class CustomButton extends Component {
                   positionX: this.props.button.positionX,
                   positionY: this.props.button.positionY}}
           bounds=".middle-component"
-          onClick={() => {this.props.handleSelectedItem(this.props.button.key)}}
+          onClick={(e) => {this.props.handleSelectedItem(e, this.props.button.key)}}
               onResizeStop={(e, direction, ref, delta, position) => {
                   this.props.button.width = ref.style.width;
                   this.props.button.height = ref.style.height;
@@ -52,7 +52,7 @@ class CustomButton extends Component {
                   this.props.button.positionY = d.y;
                   this.props.handleResize(this.props.button);
               }}
-          >
+            scale={this.props.scale}>
               {this.showBorders()}
               {this.props.button.text}
           </Rnd>

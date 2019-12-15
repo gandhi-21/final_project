@@ -13,7 +13,8 @@ class MiddleComponent extends Component {
                                 handleSelectedItem={this.props.handleSelectedItem}
                                 handleResize={this.props.handleResize}
                                 handleDuplicateItem={this.props.handleDuplicateItem}
-                                currentSelectedItem={this.props.currentSelectedItem}/>
+                                currentSelectedItem={this.props.currentSelectedItem}
+                                scale={this.props.scale}/>
     };
 
     makeNewCustomLabel = (block) => {
@@ -21,7 +22,8 @@ class MiddleComponent extends Component {
                             handleSelectedItem={this.props.handleSelectedItem}
                             handleResize={this.props.handleResize}
                             handleDuplicateItem={this.props.handleDuplicateItem}
-                            currentSelectedItem={this.props.currentSelectedItem}/>
+                            currentSelectedItem={this.props.currentSelectedItem}
+        scale={this.props.scale}/>
     };
 
     makeNewCustomButton = (block) => {
@@ -29,7 +31,8 @@ class MiddleComponent extends Component {
                              handleSelectedItem={this.props.handleSelectedItem}
                             handleResize={this.props.handleResize}
                             handleDuplicateItem={this.props.handleDuplicateItem}
-                             currentSelectedItem={this.props.currentSelectedItem}/>
+                             currentSelectedItem={this.props.currentSelectedItem}
+        scale={this.props.scale}/>
     };
 
     makeNewCustomTextField = (block) => {
@@ -37,7 +40,8 @@ class MiddleComponent extends Component {
                                 handleSelectedItem={this.props.handleSelectedItem}
                                 handleResize={this.props.handleResize}
                                 handleDuplicateItem={this.props.handleDuplicateItem}
-                                currentSelectedItem={this.props.currentSelectedItem}/>
+                                currentSelectedItem={this.props.currentSelectedItem}
+        scale={this.props.scale}/>
     };
 
     getUserComponent = (block) => {
@@ -70,7 +74,7 @@ class MiddleComponent extends Component {
 
         return(
 
-            <div>
+            <div style={{transform: "scale(" + (this.props.wireframe.zoomPercent) + ")"}}>
                 Canvas
                 <div>
                     {wireframe && components.map(UserComponent => this.getUserComponent(UserComponent))}

@@ -12,8 +12,8 @@ class LeftComponent extends Component {
         return(
           <div>
               <Row>
-                  <Col>Zoom-Out</Col>
-                  <Col>Zoom-In</Col>
+                  <Col><button onClick={() => {this.props.zoomOut()}}>Zoom Out</button></Col>
+                  <Col><button onClick={() => {this.props.zoomIn()}}>Zoom In</button></Col>
                   <Col><button onClick={this.props.handleSave}>Save</button></Col>
                   <Col><button><Link to="/">Close</Link></button></Col>
               </Row>

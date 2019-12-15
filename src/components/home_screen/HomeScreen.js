@@ -7,6 +7,12 @@ import WireFrameLinks from './WireFrameLinks'
 
 class HomeScreen extends Component {
 
+    handleDeleteWireframe = (id) => {
+        let firestore = this.props.firestore;
+        firestore.collection('WireFrames').doc(id).delete();
+        return <Redirect to="/" />;
+    };
+
     handleNewWireFrame = () => {
 
         let fireStore = this.props.firestore;
@@ -20,7 +26,7 @@ class HomeScreen extends Component {
         };
 
         fireStore.collection('WireFrames').add(newWireFrame).then(ref => {
-            this.props.history.push("/WireFrames/" + ref.id);
+            this.props.history.push("/wireframe/" + ref.id);
         });
     };
 
@@ -43,7 +49,8 @@ class HomeScreen extends Component {
                 <div className="row">
                     <div className="col s12 m4">
                         <WireFrameLinks
-                        updateTimeStamp={this.updateTimeStamp}/>
+                        updateTimeStamp={this.updateTimeStamp}
+                        handleDeleteWireframe={this.handleDeleteWireframe}/>
                     </div>
 
                     <div className="col s8">

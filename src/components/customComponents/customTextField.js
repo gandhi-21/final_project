@@ -40,7 +40,7 @@ class CustomTextField extends Component {
                        positionX: this.props.field.positionX,
                        positionY: this.props.field.positionY}}
                bounds=".middle-component"
-                   onClick={() => {this.props.handleSelectedItem(this.props.field.key)}}
+                   onClick={(e) => {this.props.handleSelectedItem(e, this.props.field.key)}}
                    onResizeStop={(e, direction, ref, delta, position) => {
                        this.props.field.width = ref.style.width;
                        this.props.field.height = ref.style.height;
@@ -51,7 +51,7 @@ class CustomTextField extends Component {
                        this.props.field.positionY = d.y;
                        this.props.handleResize(this.props.field);
                    }}
-               >
+                    scale={this.props.scale}>
                    {this.showBorders()}
                    {this.props.field.text}
                </Rnd>

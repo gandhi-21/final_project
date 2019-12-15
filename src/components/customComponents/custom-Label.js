@@ -38,7 +38,7 @@ class CustomLabel extends Component {
                     positionX: this.props.label.positionX,
                     positionY: this.props.label.positionY}}
                 bounds=".middle-component"
-            onClick={() => {this.props.handleSelectedItem(this.props.label.key)}}
+            onClick={(e) => {this.props.handleSelectedItem(e, this.props.label.key)}}
                 onResizeStop={(e, direction, ref, delta, position) => {
                     this.props.label.width = ref.style.width;
                     this.props.label.height = ref.style.height;
@@ -48,7 +48,8 @@ class CustomLabel extends Component {
                     this.props.label.positionX = d.x;
                     this.props.label.positionY = d.y;
                     this.props.handleResize(this.props.label);
-                }}>
+                }}
+                scale={this.props.scale}>
                 {this.showBorders()}
                 {this.props.label.text}
             </Rnd>

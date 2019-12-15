@@ -37,7 +37,8 @@ class WireFrameLinks extends React.Component {
 
 
                     <Link to={'/wireframe/' + wireframe.id} key={wireframe.id} onClick={() => {this.updateTimeStamp(wireframe.id)}}>
-                        <WireFrameCard wireframe={wireframe} />
+                        <WireFrameCard wireframe={wireframe}
+                        handleDeleteWireframe={this.props.handleDeleteWireframe}/>
                     </Link>
                 ))}
             </div>

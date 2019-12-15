@@ -14,7 +14,6 @@ import MiddleComponent from "../middle-component/middle-component";
 
 
 // Implement the admin functions
-// Implement the Zoom in and Zoom out
 // Implement the duplicate function
 // Implement the delete shortcut function
 // Implement the update dimensions on the wireframe
@@ -30,12 +29,6 @@ class ListScreen extends Component {
         };
     }
 
-    handleDeleteWireframe = () => {
-        let id = this.props.wireframe.id;
-        let firestore = this.props.firestore;
-        firestore.collection('WireFrames').doc(id).delete();
-        return <Redirect to="/" />;
-    };
 
     handleChange = (e) => {
         const { target } = e;
@@ -168,14 +161,26 @@ class ListScreen extends Component {
     };
 
 
-    handleSelectedItem = (key) => {
+    handleSelectedItem = (e, key) => {
         var item = this.props.wireframe.components[key];
         this.setState({currentSelectedItem: item, isItemSelected: true});
     };
 
-    updateSelectedItemNull = () => {
-        this.setState({currentSelectedItem: null, isItemSelected: false});
+    zoomIn = () => {
+        var number = this.props.wireframe.zoomPercent;
+        number = number * 2;
+        console.log(number);
+        this.props.wireframe.zoomPercent = number;
+        this.setState({wireframe: this.props.wireframe})
     };
+
+    zoomOut = () => {
+        var number = this.props.wireframe.zoomPercent;
+        number = number / 2;
+        console.log(number);
+        this.props.wireframe.zoomPercent = number;
+        this.setState({wireframe: this.props.wireframe});
+    }
 
     render() {
         const auth = this.props.auth;
@@ -194,19 +199,15 @@ class ListScreen extends Component {
                     <input className="active" type="text" name="name" id="textarea1" ref="Name" onChange={this.handleChange} defaultValue={wireframe.name} onBlur={() => {this.handleName()}}/>
                 </div>
 
-                <div className="container white">
-                    <ListTrash
-                    deleteList = {this.handleDeleteWireframe}/>
-                </div>
-
-
                 <Row>
                     <Col className="left-component major-component" m={2}> Left Component
                         <div>
                             <LeftComponent
                             makeNewComponent={this.handleNewComponent}
                             wireframe={this.state.wireframe}
-                            handleSave={this.handleSave}/>
+                            handleSave={this.handleSave}
+                            zoomIn={this.zoomIn}
+                            zoomOut={this.zoomOut}/>
                         </div>
                     </Col>
                     <Col className="middle-component major-component" m={8}>Middle Component
@@ -233,7 +234,8 @@ class ListScreen extends Component {
                             updatePropertyBorderColor={this.updatePropertyBorderColor}
                             updatePropertyBorderThickness={this.updatePropertyBorderThickness}
                             updatePropertyBorderRadius={this.updatePropertyBorderRadius}
-                            updatePropertyFontColor={this.updatePropertyFontColor}/>
+                            updatePropertyFontColor={this.updatePropertyFontColor}
+                            scale={this.state.wireframe.zoomPercent}/>
                         </div>
                     </Col>
                 </Row>

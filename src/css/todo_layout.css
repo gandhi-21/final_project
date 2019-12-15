@@ -476,3 +476,7 @@ img {
 .selected.top {
   top: -5px;
 }
+
+.middle-component {
+  overflow: scroll;
+}
