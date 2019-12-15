@@ -30,6 +30,11 @@ class CustomContainer extends Component {
                 this.props.container.height = ref.style.height;
                 this.props.handleResize(this.props.container);
             }}
+            onDragStop={(e, d) => {
+                this.props.container.positionX = d.x;
+                this.props.container.positionY = d.y;
+                this.props.handleResize(this.props.container);
+            }}
             >
                 {this.props.container.text}
             </Rnd>

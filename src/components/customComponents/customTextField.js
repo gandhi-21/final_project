@@ -27,6 +27,16 @@ class CustomTextField extends Component {
                        positionY: this.props.field.positionY}}
                bounds=".middle-component"
                    onClick={() => {this.props.handleSelectedItem(this.props.field.key)}}
+                   onResizeStop={(e, direction, ref, delta, position) => {
+                       this.props.field.width = ref.style.width;
+                       this.props.field.height = ref.style.height;
+                       this.props.handleResize(this.props.field);
+                   }}
+                   onDragStop={(e, d) => {
+                       this.props.field.positionX = d.x;
+                       this.props.field.positionY = d.y;
+                       this.props.handleResize(this.props.field);
+                   }}
                >
                    {this.props.field.text}
                </Rnd>

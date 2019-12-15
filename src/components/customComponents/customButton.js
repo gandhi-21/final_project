@@ -24,7 +24,17 @@ class CustomButton extends Component {
                   positionX: this.props.button.positionX,
                   positionY: this.props.button.positionY}}
           bounds=".middle-component"
-          onClick={() => {this.props.handleSelectedItem(this.props.button.key)}}>
+          onClick={() => {this.props.handleSelectedItem(this.props.button.key)}}
+              onResizeStop={(e, direction, ref, delta, position) => {
+                  this.props.button.width = ref.style.width;
+                  this.props.button.height = ref.style.height;
+                  this.props.handleResize(this.props.button);
+              }}
+              onDragStop={(e, d) => {
+                  this.props.button.positionX = d.x;
+                  this.props.button.positionY = d.y;
+                  this.props.handleResize(this.props.button);
+              }}>
               {this.props.button.text}
           </Rnd>
         );

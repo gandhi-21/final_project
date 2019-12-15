@@ -16,17 +16,20 @@ class MiddleComponent extends Component {
 
     makeNewCustomLabel = (block) => {
         return <CustomLabel label={block}
-                            handleSelectedItem={this.props.handleSelectedItem}/>
+                            handleSelectedItem={this.props.handleSelectedItem}
+                            handleResize={this.props.handleResize}/>
     };
 
     makeNewCustomButton = (block) => {
         return <CustomButton button={block}
-                             handleSelectedItem={this.props.handleSelectedItem}/>
+                             handleSelectedItem={this.props.handleSelectedItem}
+                            handleResize={this.props.handleResize}/>
     };
 
     makeNewCustomTextField = (block) => {
         return <CustomTextField field={block}
-                                handleSelectedItem={this.props.handleSelectedItem}/>
+                                handleSelectedItem={this.props.handleSelectedItem}
+                                handleResize={this.props.handleResize}/>
     };
 
     getUserComponent = (block) => {
