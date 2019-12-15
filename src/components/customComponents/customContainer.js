@@ -2,43 +2,31 @@ import React, { Component } from 'react';
 import {Rnd} from 'react-rnd';
 
 class CustomContainer extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-
-            container: this.props.container,
-            UserStyle: {
-                height: this.props.container.height,
-                width: this.props.container.width,
-                fontSize: this.props.container.fontSize,
-                backgroundColor: this.props.container.backgroundColor,
-                borderColor: this.props.container.borderColor,
-                fontColor: this.props.container.fontColor,
-                borderWidth: this.props.container.borderThickness,
-                borderRadius: this.props.container.borderRadius,
-                borderStyle: 'solid',
-                positionX: this.props.container.positionX,
-                positionY: this.props.container.positionY
-            }
-        }
-    }
-
     render() {
 
         return (
             <Rnd
             default={{
-                width: this.state.UserStyle.width,
-                height: this.state.UserStyle.height,
-                x: this.state.UserStyle.positionX,
-                y: this.state.UserStyle.positionY,
+                width: this.props.container.width,
+                height: this.props.container.height,
+                x: this.props.container.positionX,
+                y: this.props.container.positionY,
             }}
-            style={this.state.UserStyle}
+            style={{height: this.props.container.height,
+                width: this.props.container.width,
+                fontSize: parseInt(this.props.container.fontSize),
+                backgroundColor: this.props.container.backgroundColor,
+                borderColor: this.props.container.borderColor,
+                fontColor: this.props.container.fontColor,
+                borderWidth: parseInt(this.props.container.borderThickness),
+                borderRadius: parseInt(this.props.container.borderRadius),
+                borderStyle: 'solid',
+                positionX: this.props.container.positionX,
+                positionY: this.props.container.positionY}}
             bounds=".middle-component"
+            onClick={() => {this.props.handleSelectedItem(this.props.container.key)}}
             >
-                    {this.state.container.text}
+                {this.props.container.text}
             </Rnd>
         );
     }

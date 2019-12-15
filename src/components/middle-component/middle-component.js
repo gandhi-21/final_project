@@ -9,19 +9,23 @@ class MiddleComponent extends Component {
 
 
     makeNewCustomContainer = (block) => {
-        return <CustomContainer container={block}/>
+        return <CustomContainer container={block}
+                                handleSelectedItem={this.props.handleSelectedItem}/>
     };
 
     makeNewCustomLabel = (block) => {
-        return <CustomLabel label={block}/>
+        return <CustomLabel label={block}
+                            handleSelectedItem={this.props.handleSelectedItem}/>
     };
 
     makeNewCustomButton = (block) => {
-        return <CustomButton button={block}/>
+        return <CustomButton button={block}
+                             handleSelectedItem={this.props.handleSelectedItem}/>
     };
 
     makeNewCustomTextField = (block) => {
-        return <CustomTextField field={block}/>
+        return <CustomTextField field={block}
+                                handleSelectedItem={this.props.handleSelectedItem}/>
     };
 
     getUserComponent = (block) => {

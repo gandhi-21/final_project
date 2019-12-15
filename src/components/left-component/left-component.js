@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import {Link} from "react-router-dom";
 
 import { Row, Col } from 'react-materialize';
 
@@ -14,15 +15,15 @@ class LeftComponent extends Component {
                   <Col>Zoom-Out</Col>
                   <Col>Zoom-In</Col>
                   <Col>Save</Col>
-                  <Col>Close</Col>
+                  <Col><button><Link to="/">Close</Link></button></Col>
               </Row>
 
               <hr/>
 
-              <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customContainer")}}>Container Button</div>
-              <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customLabel")}}>Label Button</div>
-              <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customButton")}}>Button Button</div>
-              <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customTextField")}}>Textfield Button</div>
+              <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customContainer", this.props.wireframe.components.length)}}>Container Button</div>
+              <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customLabel", this.props.wireframe.components.length)}}>Label Button</div>
+              <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customButton", this.props.wireframe.components.length)}}>Button Button</div>
+              <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customTextField", this.props.wireframe.components.length)}}>Textfield Button</div>
 
           </div>
         );

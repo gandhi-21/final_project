@@ -13,14 +13,17 @@ import RightComponent from "../right-component/right-component";
 import MiddleComponent from "../middle-component/middle-component";
 
 
-// Implement the current Selected Item Machinism
+// Implement the current Selected Item Mechanism -- done
 // Implement the border on the current selected item
 // Implement the update components on drag, resize
-// Implement the update property part of selected item
+// Implement the update property part of selected item -- done
+// Implement the admin functions
 // Implement limiting the dragging scope -- done
-// Implement Save and Close
+// Implement Save
+// Implement Close -- done
 // Implement the Zoom in and Zoom out
-
+// Add key to new items -- done
+// Implement the keyboard functions
 class ListScreen extends Component {
 
     constructor(props) {
@@ -33,15 +36,10 @@ class ListScreen extends Component {
     }
 
     handleDeleteWireframe = () => {
-
         let id = this.props.wireframe.id;
-
         let firestore = this.props.firestore;
-
         firestore.collection('WireFrames').doc(id).delete();
-
         return <Redirect to="/" />;
-
     };
 
     handleChange = (e) => {
@@ -64,8 +62,7 @@ class ListScreen extends Component {
         );
     };
 
-    handleNewComponent = (type) => {
-        console.log("Make a new container of type: " + type);
+    handleNewComponent = (type, key) => {
         var newItem = {
             "type": type,
             "width": 140,
@@ -74,38 +71,70 @@ class ListScreen extends Component {
             "positionY": 50,
             "positionZ": 0,
             "text": "New" + type,
-            "fontSize": -1,
+            "fontSize": 14,
             "backgroundColor": "#ffffff",
             "borderColor": "#000000",
             "fontColor": "#000000",
             "borderThickness": 2,
-            "borderRadius": 2
+            "borderRadius": 2,
+            key: key
         };
         this.props.wireframe.components.push(newItem);
-        console.log(this.props.wireframe);
-        this.updateState(this.state.wireframe.components, this.props.wireframe.components);
+        this.setState({wireframe: this.props.wireframe});
     };
 
-    updateState = (property, change) => {
-        this.setState({property: change});
-        console.log("Updated local state");
+    updatePropertyText = (value, key) => {
+        this.props.wireframe.components[key].text = value;
+        this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
+        console.log(this.state);
     };
 
+    updatePropertyFontSize = (value, key) => {
+        this.props.wireframe.components[key].fontSize = value;
+        this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
+        console.log(this.state);
+    };
+
+
+    updatePropertyBackgroundColor= (value, key) => {
+        this.props.wireframe.components[key].backgroundColor = value;
+        this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
+        console.log(this.state);
+    };
+
+    updatePropertyBorderColor = (value, key) => {
+        this.props.wireframe.components[key].borderColor = value;
+        this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
+        console.log(this.state);
+    };
+
+    updatePropertyBorderThickness = (value, key) => {
+        this.props.wireframe.components[key].borderThickness = value;
+        this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
+        console.log(this.state);
+    };
+
+    updatePropertyBorderRadius = (value, key) => {
+        this.props.wireframe.components[key].borderRadius = value;
+        this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
+        console.log(this.state);
+    };
+
+
+    handleSelectedItem = (key) => {
+        var item = this.props.wireframe.components[key];
+        this.setState({currentSelectedItem: item, isItemSelected: true});
+    };
 
     render() {
         const auth = this.props.auth;
         const wireframe = this.props.wireframe;
-
-        console.log(wireframe);
-
         if (!auth.uid) {
             return <Redirect to="/" />;
         }
-
         if(!wireframe) {
             return <Redirect to="/"/>
         }
-
         return (
             <div className="container ">
                 <h5 className="grey-text text-darken-3">Wireframe</h5>
@@ -124,7 +153,8 @@ class ListScreen extends Component {
                     <Col className="left-component major-component" m={2}> Left Component
                         <div>
                             <LeftComponent
-                            makeNewComponent={this.handleNewComponent}/>
+                            makeNewComponent={this.handleNewComponent}
+                            wireframe={this.state.wireframe}/>
                         </div>
                     </Col>
                     <Col className="middle-component major-component" m={8}>Middle Component
@@ -132,6 +162,7 @@ class ListScreen extends Component {
                             <MiddleComponent
                             wireframe={this.state.wireframe}
                             updateState={this.updateState}
+                            handleSelectedItem={this.handleSelectedItem}
                             />
                         </div>
                     </Col>
@@ -139,9 +170,14 @@ class ListScreen extends Component {
                         <div>
                             <RightComponent
                             wireframe={this.state.wireframe}
-                            currentSelectedItem={this.state.wireframe.currentSelectedItem}
+                            currentSelectedItem={this.state.currentSelectedItem}
                             updateState={this.updateState}
-                            updateProperty={this.updateProperty}/>
+                            updatePropertyText={this.updatePropertyText}
+                            updatePropertyFontSize={this.updatePropertyFontSize}
+                            updatePropertyBackgroundColor={this.updatePropertyBackgroundColor}
+                            updatePropertyBorderColor={this.updatePropertyBorderColor}
+                            updatePropertyBorderThickness={this.updatePropertyBorderThickness}
+                            updatePropertyBorderRadius={this.updatePropertyBorderRadius}/>
                         </div>
                     </Col>
                 </Row>
