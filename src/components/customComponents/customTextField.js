@@ -4,6 +4,20 @@ import {Rnd} from "react-rnd";
 class CustomTextField extends Component {
 
 
+    showBorders = () => {
+        if(this.props.currentSelectedItem === this.props.field){
+            return (
+                <div>
+                    <div className="selected left top"/>
+                    <div className="selected right top" />
+                    <div className="selected left bottom" />
+                    <div className="selected right bottom" />
+                </div>
+            )
+        }
+    };
+
+
     render() {
         return (
            <div>
@@ -19,7 +33,7 @@ class CustomTextField extends Component {
                        fontSize: parseInt(this.props.field.fontSize),
                        backgroundColor: this.props.field.backgroundColor,
                        borderColor: this.props.field.borderColor,
-                       fontColor: this.props.field.fontColor,
+                       color: this.props.field.fontColor,
                        borderWidth: parseInt(this.props.field.borderThickness),
                        borderRadius: parseInt(this.props.field.borderRadius),
                        borderStyle: 'solid',
@@ -38,6 +52,7 @@ class CustomTextField extends Component {
                        this.props.handleResize(this.props.field);
                    }}
                >
+                   {this.showBorders()}
                    {this.props.field.text}
                </Rnd>
            </div>

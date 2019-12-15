@@ -3,6 +3,23 @@ import {Rnd} from "react-rnd";
 
 class CustomButton extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
+    showBorders = () => {
+      if(this.props.currentSelectedItem === this.props.button){
+          return (
+              <div>
+                  <div className="selected left top"/>
+                  <div className="selected right top" />
+                  <div className="selected left bottom" />
+                  <div className="selected right bottom" />
+              </div>
+          )
+      }
+    };
+
     render() {
         return (
           <Rnd
@@ -17,7 +34,7 @@ class CustomButton extends Component {
                   fontSize: parseInt(this.props.button.fontSize),
                   backgroundColor: this.props.button.backgroundColor,
                   borderColor: this.props.button.borderColor,
-                  fontColor: this.props.button.fontColor,
+                  color: this.props.button.fontColor,
                   borderWidth: parseInt(this.props.button.borderThickness),
                   borderRadius: parseInt(this.props.button.borderRadius),
                   borderStyle: 'solid',
@@ -34,7 +51,9 @@ class CustomButton extends Component {
                   this.props.button.positionX = d.x;
                   this.props.button.positionY = d.y;
                   this.props.handleResize(this.props.button);
-              }}>
+              }}
+          >
+              {this.showBorders()}
               {this.props.button.text}
           </Rnd>
         );

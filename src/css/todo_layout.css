@@ -447,3 +447,32 @@ img {
 .left-component-button:hover {
   cursor: default;
 }
+
+.selected {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border: 1px solid grey;
+  position: absolute;
+}
+
+.selected.left {
+  left: -5px;
+}
+
+.selected.middle {
+  left: 50%;
+}
+
+.selected.bottom {
+  bottom: -5px;
+}
+
+.selected.right {
+  right: -5px;
+}
+
+.selected.top {
+  top: -5px;
+}

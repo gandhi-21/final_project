@@ -9,6 +9,7 @@
     "moment": "^2.24.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-hot-keys": "^2.4.5",
     "react-materialize": "^3.5.7",
     "react-moment": "^0.9.6",
     "react-redux": "^7.1.1",

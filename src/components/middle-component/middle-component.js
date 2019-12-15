@@ -11,25 +11,33 @@ class MiddleComponent extends Component {
     makeNewCustomContainer = (block) => {
         return <CustomContainer container={block}
                                 handleSelectedItem={this.props.handleSelectedItem}
-                                handleResize={this.props.handleResize}/>
+                                handleResize={this.props.handleResize}
+                                handleDuplicateItem={this.props.handleDuplicateItem}
+                                currentSelectedItem={this.props.currentSelectedItem}/>
     };
 
     makeNewCustomLabel = (block) => {
         return <CustomLabel label={block}
                             handleSelectedItem={this.props.handleSelectedItem}
-                            handleResize={this.props.handleResize}/>
+                            handleResize={this.props.handleResize}
+                            handleDuplicateItem={this.props.handleDuplicateItem}
+                            currentSelectedItem={this.props.currentSelectedItem}/>
     };
 
     makeNewCustomButton = (block) => {
         return <CustomButton button={block}
                              handleSelectedItem={this.props.handleSelectedItem}
-                            handleResize={this.props.handleResize}/>
+                            handleResize={this.props.handleResize}
+                            handleDuplicateItem={this.props.handleDuplicateItem}
+                             currentSelectedItem={this.props.currentSelectedItem}/>
     };
 
     makeNewCustomTextField = (block) => {
         return <CustomTextField field={block}
                                 handleSelectedItem={this.props.handleSelectedItem}
-                                handleResize={this.props.handleResize}/>
+                                handleResize={this.props.handleResize}
+                                handleDuplicateItem={this.props.handleDuplicateItem}
+                                currentSelectedItem={this.props.currentSelectedItem}/>
     };
 
     getUserComponent = (block) => {
@@ -47,6 +55,11 @@ class MiddleComponent extends Component {
         }
     };
 
+    updateSelectedItem = (e) => {
+        e.stopPropagation();
+        this.props.updateSelectedItem();
+    };
+
     render() {
 
         console.log(this.props);
@@ -56,8 +69,12 @@ class MiddleComponent extends Component {
 
 
         return(
+
             <div>
-                {wireframe && components.map(UserComponent => this.getUserComponent(UserComponent))}
+                Canvas
+                <div>
+                    {wireframe && components.map(UserComponent => this.getUserComponent(UserComponent))}
+                </div>
             </div>
         );
     }

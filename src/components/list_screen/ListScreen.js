@@ -13,21 +13,12 @@ import RightComponent from "../right-component/right-component";
 import MiddleComponent from "../middle-component/middle-component";
 
 
-// Implement the current Selected Item Mechanism -- done
-// Implement the border on the current selected item
-// Implement the update components on drag, -- done
-// Implement the update component on resize -- done
-// Implement the update property part of selected item -- done
 // Implement the admin functions
-// Implement limiting the dragging scope -- done
-// Implement Save -- done
-// Implement Close -- done
 // Implement the Zoom in and Zoom out
-// Add key to new items -- done
 // Implement the duplicate function
 // Implement the delete shortcut function
 // Implement the update dimensions on the wireframe
-// Implement new wireframe button -- done
+// Delete the wireframe
 class ListScreen extends Component {
 
     constructor(props) {
@@ -76,6 +67,34 @@ class ListScreen extends Component {
             timestamp: this.props.firestore.FieldValue.serverTimestamp()
         });
         console.log("update the data");
+    };
+
+    handleDuplicateComponent = (component) => {
+
+        if(this.state.currentSelectedItem === component) {
+            var duplicateItem = {
+                "type": component.type,
+                "width": component.width,
+                "height": component.height,
+                "positionX": component.positionX + 200,
+                "positionY": component.positionY + 200,
+                "positionZ": 0,
+                "text": component.text,
+                "fontSize": component.fontSize,
+                "backgroundColor": component.backgroundColor,
+                "borderColor": component.borderColor,
+                "fontColor": component.fontColor,
+                "borderThickness": component.borderThickness,
+                "borderRadius": component.borderRadius,
+                key: this.props.wireframe.components.length
+            };
+
+            this.props.components.push(duplicateItem);
+
+            this.setState({wireframe: this.props.wireframe});
+        }
+        console.log("Duplicate Item");
+
     };
 
     handleNewComponent = (type, key) => {
@@ -142,10 +161,20 @@ class ListScreen extends Component {
         console.log(this.state);
     };
 
+    updatePropertyFontColor = (value, key) => {
+        this.props.wireframe.components[key].fontColor = value;
+        this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
+        console.log(this.state);
+    };
+
 
     handleSelectedItem = (key) => {
         var item = this.props.wireframe.components[key];
         this.setState({currentSelectedItem: item, isItemSelected: true});
+    };
+
+    updateSelectedItemNull = () => {
+        this.setState({currentSelectedItem: null, isItemSelected: false});
     };
 
     render() {
@@ -187,6 +216,8 @@ class ListScreen extends Component {
                             updateState={this.updateState}
                             handleSelectedItem={this.handleSelectedItem}
                             handleResize={this.handleResize}
+                            currentSelectedItem={this.state.currentSelectedItem}
+                            updateSelectedItem={this.updateSelectedItemNull}
                             />
                         </div>
                     </Col>
@@ -201,7 +232,8 @@ class ListScreen extends Component {
                             updatePropertyBackgroundColor={this.updatePropertyBackgroundColor}
                             updatePropertyBorderColor={this.updatePropertyBorderColor}
                             updatePropertyBorderThickness={this.updatePropertyBorderThickness}
-                            updatePropertyBorderRadius={this.updatePropertyBorderRadius}/>
+                            updatePropertyBorderRadius={this.updatePropertyBorderRadius}
+                            updatePropertyFontColor={this.updatePropertyFontColor}/>
                         </div>
                     </Col>
                 </Row>

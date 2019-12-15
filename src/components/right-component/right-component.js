@@ -23,14 +23,18 @@ class RightComponent extends Component {
                 <div>Background</div>
                 <input type="color" name="backgroundColor" ref="BGColor" value={this.props.currentSelectedItem != null ? this.props.currentSelectedItem.backgroundColor : "#ff0000"} onChange={(e) => {
                     if(this.props.currentSelectedItem) {
-                        console.log(this.refs.BGColor.value);
                         this.props.updatePropertyBackgroundColor(this.refs.BGColor.value, this.props.currentSelectedItem.key);
+                    }
+                }}/>
+                <div>Font Color</div>
+                <input type="color" name="fontColor" ref="FColor" value={this.props.currentSelectedItem != null ? this.props.currentSelectedItem.fontColor : "#ff0000"} onChange={(e) => {
+                    if(this.props.currentSelectedItem) {
+                        this.props.updatePropertyFontColor(this.refs.FColor.value, this.props.currentSelectedItem.key);
                     }
                 }}/>
                 <div>Border-Color</div>
                 <input type="color" name="borderColor" ref="BRColor" value={this.props.currentSelectedItem != null ? this.props.currentSelectedItem.borderColor : "#ff0000"} onChange={(e) => {
                     if(this.props.currentSelectedItem) {
-
                         this.props.updatePropertyBorderColor(this.refs.BRColor.value, this.props.currentSelectedItem.key);
                     }
                 }}/>

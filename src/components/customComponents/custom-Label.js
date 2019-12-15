@@ -3,6 +3,19 @@ import {Rnd} from 'react-rnd';
 
 class CustomLabel extends Component {
 
+    showBorders = () => {
+        if(this.props.currentSelectedItem === this.props.label){
+            return (
+                <div>
+                    <div className="selected left top"/>
+                    <div className="selected right top" />
+                    <div className="selected left bottom" />
+                    <div className="selected right bottom" />
+                </div>
+            )
+        }
+    };
+
     render() {
 
         return (
@@ -18,7 +31,7 @@ class CustomLabel extends Component {
                     fontSize: parseInt(this.props.label.fontSize),
                     backgroundColor: this.props.label.backgroundColor,
                     borderColor: this.props.label.borderColor,
-                    fontColor: this.props.label.fontColor,
+                    color: this.props.label.fontColor,
                     borderWidth: parseInt(this.props.label.borderThickness),
                     borderRadius: parseInt(this.props.label.borderRadius),
                     borderStyle: 'solid',
@@ -36,6 +49,7 @@ class CustomLabel extends Component {
                     this.props.label.positionY = d.y;
                     this.props.handleResize(this.props.label);
                 }}>
+                {this.showBorders()}
                 {this.props.label.text}
             </Rnd>
         )

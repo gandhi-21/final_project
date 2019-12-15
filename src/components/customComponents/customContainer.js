@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import {Rnd} from 'react-rnd';
 
 class CustomContainer extends Component {
+
+    showBorders = () => {
+        if(this.props.currentSelectedItem === this.props.container){
+            return (
+                <div>
+                    <div className="selected left top"/>
+                    <div className="selected right top" />
+                    <div className="selected left bottom" />
+                    <div className="selected right bottom" />
+                </div>
+            )
+        }
+    };
+
     render() {
 
         return (
@@ -17,7 +31,7 @@ class CustomContainer extends Component {
                 fontSize: parseInt(this.props.container.fontSize),
                 backgroundColor: this.props.container.backgroundColor,
                 borderColor: this.props.container.borderColor,
-                fontColor: this.props.container.fontColor,
+                color: this.props.container.fontColor,
                 borderWidth: parseInt(this.props.container.borderThickness),
                 borderRadius: parseInt(this.props.container.borderRadius),
                 borderStyle: 'solid',
@@ -36,6 +50,7 @@ class CustomContainer extends Component {
                 this.props.handleResize(this.props.container);
             }}
             >
+                {this.showBorders()}
                 {this.props.container.text}
             </Rnd>
         );

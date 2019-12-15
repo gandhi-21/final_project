@@ -18,7 +18,7 @@
                     "fontSize": -1,
                     "backgroundColor": "#ffffff",
                     "borderColor": "#000000",
-                    "fontColor": "#000000",
+                    "fontColor": "#f2f2f2",
                     "borderThickness": 2,
                     "borderRadius": 2
                 },
