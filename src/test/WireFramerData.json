@@ -383,18 +383,20 @@
         }
     ],
 
-    "users": [
+    "Users": [
         {
             "firstName": "Gaurav",
             "lastName": "Gandhi",
             "initials": "GG",
-            "isAdmin": true
+            "isAdmin": true,
+            "email": "g2@test.com"
         },
         {
             "firstName": "The McKilla",
             "lastName": "Gorilla",
             "initials": "TG",
-            "isAdmin": false
+            "isAdmin": false,
+            "email": "g@test.com"
         }
     ]
 }

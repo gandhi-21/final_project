@@ -3,6 +3,7 @@ import todoJson from './WireFramerData.json'
 import { getFirestore } from 'redux-firestore';
 import { connect }  from 'react-redux';
 import { compose } from 'redux';
+import { firestoreConnect } from "react-redux-firebase";
 
 class DatabaseTester extends React.Component {
 
@@ -44,12 +45,13 @@ class DatabaseTester extends React.Component {
         });
 
         console.log("adding users");
-        todoJson.users.forEach(userJson => {
+        todoJson.Users.forEach(userJson => {
             fireStore.collection('Users').add({
                 firstname: userJson.firstName,
                 lastname: userJson.lastName,
                 initials: userJson.initials,
-                isadmin: userJson.isAdmin
+                isadmin: userJson.isAdmin,
+                email: userJson.email
             }).then(() => {
                 console.log("Users added");
             }).catch((err) => {
@@ -60,7 +62,8 @@ class DatabaseTester extends React.Component {
     };
 
     render() {
-        console.log(this.props.auth);
+        console.log(this.props);
+
         return (
             <div>
                 <button onClick={this.handleClear}>Clear Database</button>
@@ -70,10 +73,17 @@ class DatabaseTester extends React.Component {
 }
 
 const mapStateToProps = function (state) {
+    console.log(state.firestore.data);
     return {
         auth: state.firebase.auth,
-        firebase: state.firebase
+        firebase: state.firebase,
+        users: state.firestore.data.Users
     };
 };
 
-export default connect(mapStateToProps)(DatabaseTester);
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        {collection: 'Users'}
+    ])
+)(DatabaseTester);
