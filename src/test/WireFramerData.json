@@ -276,7 +276,7 @@
                     "positionY": 50,
                     "positionZ": 0,
                     "text": "Background Container",
-                    "fontSize": -1,
+                    "fontSize": 10,
                     "backgroundColor": "#ffffff",
                     "borderColor": "#000000",
                     "fontColor": "#000000",

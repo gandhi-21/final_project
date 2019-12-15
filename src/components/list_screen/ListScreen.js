@@ -15,7 +15,7 @@ import MiddleComponent from "../middle-component/middle-component";
 
 // Implement the current Selected Item Mechanism -- done
 // Implement the border on the current selected item
-// Implement the update components on drag,
+// Implement the update components on drag, -- done
 // Implement the update component on resize -- done
 // Implement the update property part of selected item -- done
 // Implement the admin functions
@@ -64,6 +64,18 @@ class ListScreen extends Component {
         let firestore = this.props.firestore.collection('WireFrames').doc(this.props.wireframe.id).update(
             {name: newName}
         );
+    };
+
+    handleSave = () => {
+        console.log(this.props.wireframe.id);
+        let firestore = this.props.firestore.collection("WireFrames").doc(this.props.wireframe.id).update({
+            components: this.state.wireframe.components,
+            name: this.state.wireframe.name,
+            owner: this.state.wireframe.owner,
+            zoomPercent: this.state.wireframe.zoomPercent,
+            timestamp: this.props.firestore.FieldValue.serverTimestamp()
+        });
+        console.log("update the data");
     };
 
     handleNewComponent = (type, key) => {
@@ -164,7 +176,8 @@ class ListScreen extends Component {
                         <div>
                             <LeftComponent
                             makeNewComponent={this.handleNewComponent}
-                            wireframe={this.state.wireframe}/>
+                            wireframe={this.state.wireframe}
+                            handleSave={this.handleSave}/>
                         </div>
                     </Col>
                     <Col className="middle-component major-component" m={8}>Middle Component
