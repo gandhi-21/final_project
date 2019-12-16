@@ -38,7 +38,9 @@ class DatabaseTester extends React.Component {
                     components: wireFrameJson.components,
                     zoomPercent: wireFrameJson.zoomPercent,
                     timestamp: fireStore.FieldValue.serverTimestamp(),
-                    sorting: "asc"
+                    sorting: "asc",
+                    height: wireFrameJson.height,
+                    width: wireFrameJson.width
                 }).then(() => {
                     console.log("DATABASE RESET");
                 }).catch((err) => {

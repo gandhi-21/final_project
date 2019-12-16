@@ -188,8 +188,7 @@ class ListScreen extends Component {
         this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
         console.log(this.state);
     };
-
-
+    
     handleSelectedItem = (e, key) => {
         e.stopPropagation();
         var item = this.props.wireframe.components[key];
@@ -216,6 +215,16 @@ class ListScreen extends Component {
         this.props.wireframe.zoomPercent = number;
         this.setState({wireframe: this.props.wireframe});
     };
+
+    updateWireframeHeight = (value) => {
+      this.props.wireframe.height = value;
+      this.setState({wireframe: this.props.wireframe});
+    };
+
+    updateWireframeWidth = (value) => {
+        this.props.wireframe.width = value;
+        this.setState({wireframe: this.props.wireframe});
+    }
 
     render() {
         const auth = this.props.auth;
@@ -245,7 +254,7 @@ class ListScreen extends Component {
                             zoomOut={this.zoomOut}/>
                         </div>
                     </Col>
-                    <Col className="middle-component major-component" m={8}>
+                    <Col className="middle-component major-component" m={8} style={{height: this.state.wireframe.height.toString() + "px", width: this.state.wireframe.width.toString() + "px"}}>
                         <div>
                             <MiddleComponent
                             wireframe={this.state.wireframe}
@@ -271,7 +280,10 @@ class ListScreen extends Component {
                             updatePropertyBorderThickness={this.updatePropertyBorderThickness}
                             updatePropertyBorderRadius={this.updatePropertyBorderRadius}
                             updatePropertyFontColor={this.updatePropertyFontColor}
-                            scale={this.state.wireframe.zoomPercent}/>
+                            scale={this.state.wireframe.zoomPercent}
+                            updateHeight={this.updateWireframeHeight}
+                            updateWidth={this.updateWireframeWidth}
+                            />
                         </div>
                     </Col>
                 </Row>
