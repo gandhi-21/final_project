@@ -55,7 +55,9 @@ class ListScreen extends Component {
             name: this.state.wireframe.name,
             owner: this.state.wireframe.owner,
             zoomPercent: this.state.wireframe.zoomPercent,
-            timestamp: this.props.firestore.FieldValue.serverTimestamp()
+            timestamp: this.props.firestore.FieldValue.serverTimestamp(),
+            width: this.state.wireframe.width,
+            height: this.state.wireframe.height
         });
         console.log("update the data");
     };
@@ -188,7 +190,7 @@ class ListScreen extends Component {
         this.setState({wireframe: this.props.wireframe, currentSelectedItem: this.props.wireframe.components[key]});
         console.log(this.state);
     };
-    
+
     handleSelectedItem = (e, key) => {
         e.stopPropagation();
         var item = this.props.wireframe.components[key];
