@@ -16,8 +16,8 @@ import MiddleComponent from "../middle-component/middle-component";
 // Implement the duplicate function
 // Implement the delete shortcut function
 // Implement the update dimensions on the wireframe
-// CSS
 // Deselect an item
+
 class ListScreen extends Component {
 
     constructor(props) {
@@ -45,9 +45,8 @@ class ListScreen extends Component {
         if(newName === '') {
             newName = "New Name";
         }
-        let firestore = this.props.firestore.collection('WireFrames').doc(this.props.wireframe.id).update(
-            {name: newName}
-        );
+       this.props.wireframe.name = newName;
+        this.setState({wireframe: this.props.wireframe});
     };
 
     handleSave = () => {
