@@ -8,7 +8,7 @@ class RightComponent extends Component {
         return(
             <div>
                 <div>Properties</div>
-                <div>Text Values</div>
+                <div>Text</div>
                 <input type="text" ref="Text" value={this.props.currentSelectedItem != null ? this.props.currentSelectedItem.text : "empty"} onChange={(e) => {
                     if(this.props.currentSelectedItem) {
                         this.props.updatePropertyText(this.refs.Text.value, this.props.currentSelectedItem.key);

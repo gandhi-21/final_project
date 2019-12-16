@@ -16,7 +16,8 @@ import MiddleComponent from "../middle-component/middle-component";
 // Implement the duplicate function
 // Implement the delete shortcut function
 // Implement the update dimensions on the wireframe
-
+// CSS
+// Deselect an item
 class ListScreen extends Component {
 
     constructor(props) {
@@ -199,7 +200,7 @@ class ListScreen extends Component {
                 </div>
 
                 <Row>
-                    <Col className="left-component major-component" m={2}> Left Component
+                    <Col className="left-component major-component" m={2}>
                         <div>
                             <LeftComponent
                             makeNewComponent={this.handleNewComponent}
@@ -221,7 +222,7 @@ class ListScreen extends Component {
                             />
                         </div>
                     </Col>
-                    <Col className="right-component major-component" m={2}>Right Component
+                    <Col className="right-component major-component" m={2}>
                         <div>
                             <RightComponent
                             wireframe={this.state.wireframe}

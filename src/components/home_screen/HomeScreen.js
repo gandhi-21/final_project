@@ -21,7 +21,7 @@ class HomeScreen extends Component {
             name: "New Name",
             owner: this.props.auth.uid,
             components: [],
-            zoomPercent: 100,
+            zoomPercent: 1,
             timestamp: this.props.firestore.FieldValue.serverTimestamp(),
         };
 

@@ -75,7 +75,6 @@ class MiddleComponent extends Component {
         return(
 
             <div style={{transform: "scale(" + (this.props.wireframe.zoomPercent) + ")"}}>
-                Canvas
                 <div>
                     {wireframe && components.map(UserComponent => this.getUserComponent(UserComponent))}
                 </div>
