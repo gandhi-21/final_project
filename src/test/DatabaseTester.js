@@ -21,10 +21,10 @@ class DatabaseTester extends React.Component {
             })
         });
 
-        fireStore.collection('Users').get().then(function(querySnapshot){
+        fireStore.collection('users').get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc) {
                 console.log("deleting " + doc.id);
-                fireStore.collection('Users').doc(doc.id).delete();
+                fireStore.collection('users').doc(doc.id).delete();
             })
         });
     };
@@ -47,8 +47,8 @@ class DatabaseTester extends React.Component {
         });
 
         console.log("adding users");
-        todoJson.Users.forEach(userJson => {
-            fireStore.collection('Users').add({
+        todoJson.users.forEach(userJson => {
+            fireStore.collection('users').add({
                 firstname: userJson.firstName,
                 lastname: userJson.lastName,
                 initials: userJson.initials,
@@ -87,7 +87,7 @@ class DatabaseTester extends React.Component {
 }
 
 const mapStateToProps = function (state) {
-    const users = state.firestore.data.Users;
+    const users = state.firestore.data.users;
     return {
         auth: state.firebase.auth,
         firebase: state.firebase,
@@ -98,6 +98,6 @@ const mapStateToProps = function (state) {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        {collection: 'Users'}
+        {collection: 'users'}
     ])
 )(DatabaseTester);

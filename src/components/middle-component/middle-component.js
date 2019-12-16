@@ -27,7 +27,7 @@ class MiddleComponent extends Component {
 
     componentWillUnmount() {
         document.removeEventListener('keydown',(event) => {this.props.handleDuplicateComponent(event)});
-        document.removeEventListener('keydown',(event) => {this.props.handleDeleteComponent(event)})
+        document.removeEventListener('keydown',(event) => {this.props.handleDeleteComponent(event)});
     };
 
 
@@ -82,11 +82,6 @@ class MiddleComponent extends Component {
         }
     };
 
-    updateSelectedItem = (e) => {
-        e.stopPropagation();
-        this.props.updateSelectedItem();
-    };
-
     render() {
 
         console.log(this.props);
@@ -97,7 +92,7 @@ class MiddleComponent extends Component {
 
         return(
 
-            <div style={{transform: "scale(" + (this.props.wireframe.zoomPercent) + ")"}}>
+            <div style={{transform: "scale(" + (this.props.wireframe.zoomPercent) + ")"}} >
                 <div>
                     {wireframe && components.map(UserComponent => this.getUserComponent(UserComponent))}
                 </div>

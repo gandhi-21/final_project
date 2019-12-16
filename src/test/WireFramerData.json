@@ -383,7 +383,7 @@
         }
     ],
 
-    "Users": [
+    "users": [
         {
             "firstName": "Gaurav",
             "lastName": "Gandhi",

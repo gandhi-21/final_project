@@ -13,8 +13,6 @@ import RightComponent from "../right-component/right-component";
 import MiddleComponent from "../middle-component/middle-component";
 
 
-// Implement the duplicate function
-// Implement the delete shortcut function
 // Implement the update dimensions on the wireframe
 // Deselect an item
 
@@ -193,8 +191,14 @@ class ListScreen extends Component {
 
 
     handleSelectedItem = (e, key) => {
+        e.stopPropagation();
         var item = this.props.wireframe.components[key];
         this.setState({currentSelectedItem: item, isItemSelected: true});
+    };
+
+    updateSelectedItemNull = (e) => {
+        // e.stopPropagation();
+        this.setState({currentSelectedItem: null, isItemSelected: false});
     };
 
     zoomIn = () => {
@@ -249,14 +253,13 @@ class ListScreen extends Component {
                             handleSelectedItem={this.handleSelectedItem}
                             handleResize={this.handleResize}
                             currentSelectedItem={this.state.currentSelectedItem}
-                            updateSelectedItem={this.updateSelectedItemNull}
+                            onClick={(e) => this.updateSelectedItemNull(e)}
                             handleDuplicateComponent={this.handleDuplicateComponent}
-                            handleDeleteComponent={this.handleDeleteComponent}
-                            />
+                            handleDeleteComponent={this.handleDeleteComponent}/>
                         </div>
                     </Col>
                     <Col className="right-component major-component" m={2}>
-                        <div>
+                        <div >
                             <RightComponent
                             wireframe={this.state.wireframe}
                             currentSelectedItem={this.state.currentSelectedItem}
