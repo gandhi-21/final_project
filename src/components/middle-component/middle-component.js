@@ -8,6 +8,21 @@ import CustomTextField from "../customComponents/customTextField";
 class MiddleComponent extends Component {
 
 
+    activateCtrlD = () => {
+        document.addEventListener('keypress', (event) => {
+            this.props.handleDuplicateComponent(event);
+        });
+    };
+
+    componentDidMount() {
+        this.activateCtrlD();
+    };
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown',(event) => {this.props.handleDuplicateComponent(event)})
+    };
+
+
     makeNewCustomContainer = (block) => {
         return <CustomContainer container={block}
                                 handleSelectedItem={this.props.handleSelectedItem}

@@ -30,6 +30,7 @@ class ListScreen extends Component {
     }
 
 
+
     handleChange = (e) => {
         const { target } = e;
 
@@ -60,33 +61,42 @@ class ListScreen extends Component {
         });
         console.log("update the data");
     };
-
-    handleDuplicateComponent = (component) => {
-
-        if(this.state.currentSelectedItem === component) {
-            var duplicateItem = {
-                "type": component.type,
-                "width": component.width,
-                "height": component.height,
-                "positionX": component.positionX + 200,
-                "positionY": component.positionY + 200,
-                "positionZ": 0,
-                "text": component.text,
-                "fontSize": component.fontSize,
-                "backgroundColor": component.backgroundColor,
-                "borderColor": component.borderColor,
-                "fontColor": component.fontColor,
-                "borderThickness": component.borderThickness,
-                "borderRadius": component.borderRadius,
-                key: this.props.wireframe.components.length
-            };
-
-            this.props.components.push(duplicateItem);
-
-            this.setState({wireframe: this.props.wireframe});
+    handleDuplicateComponent = (event) => {
+        if (event.ctrlKey===true  && event.key ==="d") {
+            //   window.alert('Undo!');
+            console.log(this.state.currentItem);
+            if(this.state.currentItem){
+                var newItem = {
+                    "key": this.props.wireFrame.items.length,
+                    "type": this.state.currentItem.type,
+                    "width": this.state.currentItem.width,
+                    "height": this.state.currentItem.height,
+                    "Xpos": this.state.currentItem.Xpos + 100,
+                    "Ypos": this.state.currentItem.Ypos + 100,
+                    "Zpos": this.state.currentItem.Zpos,
+                    "text": this.state.currentItem.text,
+                    "fontSize": this.state.currentItem.fontSize,
+                    "backgroundColor":this.state.currentItem.backgroundColor,
+                    "borderColor": this.state.currentItem.borderColor,
+                    "fontColor": this.state.currentItem.fontColor,
+                    "borderThickness": this.state.currentItem.borderThickness,
+                    "borderRadius": this.state.currentItem.borderRadius
+                }
+                // var newItem = this.state.currentItem
+                // newItem.key = this.props.wireFrame.items.length
+                this.props.wireFrame.items.push(newItem);
+                console.log(this.props.wireFrame)
+                this.setState({wireFrame:this.props.wireFrame});
+                this.setState({currentItem:newItem});
+                console.log(this.state.wireFrame)
+            }
+            event.preventDefault();
         }
-        console.log("Duplicate Item");
+    };
 
+    handleDeleteComponent = (component) => {
+        this.props.components.splice(component.key);
+        this.setState({wireframe: this.props.wireframe});
     };
 
     handleNewComponent = (type, key) => {
@@ -179,7 +189,7 @@ class ListScreen extends Component {
         console.log(number);
         this.props.wireframe.zoomPercent = number;
         this.setState({wireframe: this.props.wireframe});
-    }
+    };
 
     render() {
         const auth = this.props.auth;
@@ -191,7 +201,7 @@ class ListScreen extends Component {
             return <Redirect to="/"/>
         }
         return (
-            <div className="container ">
+            <div className="container">
                 <h5 className="grey-text text-darken-3">Wireframe</h5>
                 <div className="input-field">
                     <label className="active" for="textarea1">Name</label>
@@ -218,6 +228,7 @@ class ListScreen extends Component {
                             handleResize={this.handleResize}
                             currentSelectedItem={this.state.currentSelectedItem}
                             updateSelectedItem={this.updateSelectedItemNull}
+                            handleDuplicateComponent={this.handleDuplicateComponent}
                             />
                         </div>
                     </Col>
@@ -254,7 +265,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     wireframe,
-    auth: state.firebase.auth,
+    auth: state.firebase.auth
   };
 };
 
