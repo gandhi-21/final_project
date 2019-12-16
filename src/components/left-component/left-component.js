@@ -27,12 +27,19 @@ class LeftComponent extends Component {
 
               <hr/>
 
+              <div>Make new Container:</div>
               <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customContainer", this.props.wireframe.components.length)}}>
                   <img src={sampleContainer} alt="" className="contimg"/></div>
+              <br/>
+              <div>Make new Label:</div>
               <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customLabel", this.props.wireframe.components.length)}}>
                   <img src={sampleLabel} alt="" className="labimg"/></div>
+              <br/>
+              <div>Make new button:</div>
               <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customButton", this.props.wireframe.components.length)}}>
                   <img src={sampleButton} alt="" className="butimg"/></div>
+              <br/>
+              <div>Make new Field:</div>
               <div className="left-component-button" onClick={() => {this.props.makeNewComponent("customTextField", this.props.wireframe.components.length)}}>
                   <img src={sampleTextField} alt="" className="flimg"/></div>
           </div>

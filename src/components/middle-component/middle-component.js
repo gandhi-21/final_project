@@ -14,12 +14,20 @@ class MiddleComponent extends Component {
         });
     };
 
+    activateDelete = () => {
+        document.addEventListener('keydown', (event) => {
+            this.props.handleDeleteComponent(event, this.props.wireframe);
+        })
+    };
+
     componentDidMount() {
         this.activateCtrlD();
+        this.activateDelete();
     };
 
     componentWillUnmount() {
-        document.removeEventListener('keydown',(event) => {this.props.handleDuplicateComponent(event)})
+        document.removeEventListener('keydown',(event) => {this.props.handleDuplicateComponent(event)});
+        document.removeEventListener('keydown',(event) => {this.props.handleDeleteComponent(event)})
     };
 
 

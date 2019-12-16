@@ -62,41 +62,63 @@ class ListScreen extends Component {
         console.log("update the data");
     };
     handleDuplicateComponent = (event) => {
-        if (event.ctrlKey===true  && event.key ==="d") {
-            //   window.alert('Undo!');
-            console.log(this.state.currentItem);
-            if(this.state.currentItem){
+        if (event.key ==="d" && event.ctrlKey) {
+            console.log(this.state.currentSelectedItem);
+            if(this.state.currentSelectedItem){
                 var newItem = {
-                    "key": this.props.wireFrame.items.length,
-                    "type": this.state.currentItem.type,
-                    "width": this.state.currentItem.width,
-                    "height": this.state.currentItem.height,
-                    "Xpos": this.state.currentItem.Xpos + 100,
-                    "Ypos": this.state.currentItem.Ypos + 100,
-                    "Zpos": this.state.currentItem.Zpos,
-                    "text": this.state.currentItem.text,
-                    "fontSize": this.state.currentItem.fontSize,
-                    "backgroundColor":this.state.currentItem.backgroundColor,
-                    "borderColor": this.state.currentItem.borderColor,
-                    "fontColor": this.state.currentItem.fontColor,
-                    "borderThickness": this.state.currentItem.borderThickness,
-                    "borderRadius": this.state.currentItem.borderRadius
+                    "key": this.props.wireframe.components.length,
+                    "type": this.state.currentSelectedItem.type,
+                    "width": this.state.currentSelectedItem.width,
+                    "height": this.state.currentSelectedItem.height,
+                    "positionX": this.state.currentSelectedItem.positionX + 100,
+                    "positionY": this.state.currentSelectedItem.positionY + 100,
+                    "positionZ": this.state.currentSelectedItem.positionZ,
+                    "text": this.state.currentSelectedItem.text,
+                    "fontSize": this.state.currentSelectedItem.fontSize,
+                    "backgroundColor":this.state.currentSelectedItem.backgroundColor,
+                    "borderColor": this.state.currentSelectedItem.borderColor,
+                    "fontColor": this.state.currentSelectedItem.fontColor,
+                    "borderThickness": this.state.currentSelectedItem.borderThickness,
+                    "borderRadius": this.state.currentSelectedItem.borderRadius
                 }
                 // var newItem = this.state.currentItem
                 // newItem.key = this.props.wireFrame.items.length
-                this.props.wireFrame.items.push(newItem);
-                console.log(this.props.wireFrame)
-                this.setState({wireFrame:this.props.wireFrame});
-                this.setState({currentItem:newItem});
-                console.log(this.state.wireFrame)
+                this.props.wireframe.components.push(newItem);
+                console.log(this.props.wireframe);
+                this.setState({wireframe:this.props.wireframe});
+                this.setState({currentSelectedItem:newItem});
+                console.log(this.state.wireframe)
             }
             event.preventDefault();
-        }
+        } else if(event.keyCode===8 || event.key==="Backspace") {
+          this.handleDeleteComponent(this.state.currentSelectedItem);
+          event.preventDefault();
+        };
     };
 
-    handleDeleteComponent = (component) => {
-        this.props.components.splice(component.key);
-        this.setState({wireframe: this.props.wireframe});
+    handleDeleteComponent = (event, wireframe) => {
+        if(event.keyCode===8 || event.key==="Backspace") {
+
+            console.log(wireframe);
+
+            if(!this.state.currentSelectedItem) {
+                return;
+            }
+
+            delete wireframe.components[this.state.currentSelectedItem.key];
+            let newWireframe = [];
+            for(let i=0;i<wireframe.components.length;i++) {
+                if(i === this.state.currentSelectedItem){
+                    continue;
+                }
+                newWireframe[i] = wireframe.components[i];
+            }
+
+            console.log(wireframe);
+
+            this.setState({wireframe: wireframe, currentSelectedItem: null, isSelected:false});
+            event.preventDefault();
+        }
     };
 
     handleNewComponent = (type, key) => {
@@ -219,7 +241,7 @@ class ListScreen extends Component {
                             zoomOut={this.zoomOut}/>
                         </div>
                     </Col>
-                    <Col className="middle-component major-component" m={8}>Middle Component
+                    <Col className="middle-component major-component" m={8}>
                         <div>
                             <MiddleComponent
                             wireframe={this.state.wireframe}
@@ -229,6 +251,7 @@ class ListScreen extends Component {
                             currentSelectedItem={this.state.currentSelectedItem}
                             updateSelectedItem={this.updateSelectedItemNull}
                             handleDuplicateComponent={this.handleDuplicateComponent}
+                            handleDeleteComponent={this.handleDeleteComponent}
                             />
                         </div>
                     </Col>
